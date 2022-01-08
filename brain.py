@@ -21,6 +21,7 @@ class Brain:
 
 
     def wakeOnKeyword(self):
+        print("Waiting for keyword: Remy\n")
         self.startWorking.clear();
         listenForName = sp.listenInBackground(self.reactOnName)
 
@@ -102,7 +103,13 @@ class Cooking:
 
     def start(self):
         # 1. Search recipe
-        self.searchRecipe()
+        recipe = self.searchRecipe()
+
+        # 2. Get all ingredients ready
+        #self.getIngredientsOut(recipe)
+
+        # 3. Start cooking process
+        #self.startCookingProcess(recipe)
 
 
     def searchRecipe(self):
@@ -117,6 +124,9 @@ class Cooking:
             recipe = "Chicken burritos"
             vo.speak("How about {}?".format(recipe))
 
+            found = True
+
+        return recipe
 
 
 if __name__ == '__main__':
