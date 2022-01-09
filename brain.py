@@ -1,4 +1,4 @@
-import speech as sp
+import ear as sp
 import voice as vo
 import threading
 import re
