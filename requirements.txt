@@ -130,6 +130,5 @@ pyobjc-framework-VideoToolbox==8.1
 pyobjc-framework-Virtualization==8.1
 pyobjc-framework-Vision==8.1
 pyobjc-framework-WebKit==8.1
-python-Levenshtein==0.12.2
 pyttsx3==2.90
 SpeechRecognition==3.8.1
