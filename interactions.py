@@ -44,3 +44,4 @@ def remy_interactions():
                 print("Sorry, could not find that 😔")
         else:
             print("You have to say Hey Remy for starting the app")
+remy_interactions()
