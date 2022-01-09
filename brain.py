@@ -54,7 +54,7 @@ class Brain:
                             'startCooking' : self.startCooking, 
                             'unknown' : lambda: self.speak("What the fuck does that mean?"), 
                             'chat' : lambda: self.runChatBot,
-                            'quit' : lambda: self.stop
+                            'quit' : lambda: self.requestQuit
                           }
 
 
