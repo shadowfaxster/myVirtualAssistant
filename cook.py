@@ -2,13 +2,7 @@
 # Cooking ability
 import ability
 import time
-
-class Recipe:
-    def __init__(self, title, ingredients, instructions):
-        self.title = title
-        self.ingredients = ingredients
-        self.instructions = instructions
-
+from recipeDatabase import RecipeDatabase
 
 class Cooking(ability.Ability):
     def __init__(self, brain):
@@ -19,10 +13,7 @@ class Cooking(ability.Ability):
         # LOAD RECIPE DATABASE
         # self.recipes = loadRecipeDatabase()
 
-        self.recipes = [ 
-                        Recipe('chicken burrito', 'Chicken, Beans', ['Get ingredients', 'Make burrito']), 
-                        Recipe('Chicken fajitas', 'Chicken, Fajitas', ['Get ingredients', 'Make fajitas'])
-                        ]
+        self.recipes = RecipeDatabase()
 
         self.brain = brain
 
@@ -32,25 +23,27 @@ class Cooking(ability.Ability):
         recipe = self.searchRecipe()
 
         # 2. Get all ingredients ready
-        recipe = self.recipes[1]
         self.getIngredientsReady(recipe)
 
         # 3. Start cooking process
-        #self.startCookingProcess(recipe)
+        self.guideCooking(recipe)
 
     def searchRecipe(self):
         found = False;
         while not found and not self.abort:
-            self.brain.speak("Please tell me a recipe name:")
+            self.brain.speak("Please tell me your choice for main ingredients for the recipe")
+            mainIngredients = self.brain.listen()
+            
+            # # Avoid list
+            self.brain.speak("List any ingredients you would like to avoid")
+            avoidIngredients = self.brain.listen()
 
-            recipeName = self.brain.listen()
-            self.brain.speak("let's see what I can find for " + recipeName)
+            self.brain.speak("let's see what I can find with " + mainIngredients)
 
-            # foundItems = self.recipeDatabase.search(name)
-            foundItems = self.recipes; 
+            foundItems = self.recipes.search(mainIngredients, avoidIngredients); 
 
             for recipe in foundItems:
-                self.brain.speak("How about {}?".format(recipe.title))
+                self.brain.speak("How about {}?".format(recipe['name']))
 
                 answer = self.brain.listen()
                 intent = self.brain.interpret(answer, ['yes', 'no', 'abort'])
@@ -77,25 +70,52 @@ class Cooking(ability.Ability):
 
 
     def getIngredientsReady(self, recipe):
-        if not self.abort:
-            self.brain.speak("Let's get the ingredients ready. We will need {}.".format(recipe.ingredients))
-            self.brain.speak("We'll get them one by one. ")
+        if self.abort:
+            return 
 
-            print("Listing ingredients...")
-            for ingredient in recipe.ingredients.split():
-                self.brain.speak(ingredient)
+        self.brain.speak("Let's get the ingredients ready. We will need {}.".format(recipe['ingredients']))
+        self.brain.speak("We'll get them one by one. ")
 
-                intent = 'Wait'
-                while intent != 'yes' and not self.abort:
-                    time.sleep(0.5)
+        print("Listing ingredients...")
+        for ingredient in recipe['ingredients']:
+            self.brain.speak(ingredient)
 
-                    self.brain.speak("Ready?")
+            intent = 'Wait'
+            while intent != 'yes' and not self.abort:
+                time.sleep(0.5)
 
-                    answer = self.brain.listen()
-                    intent = self.brain.interpret(answer, ['yes', 'no', 'abort'])
+                self.brain.speak("Ready?")
 
-                    if intent == 'abort' and self.checkAbort():
-                        return
+                answer = self.brain.listen()
+                intent = self.brain.interpret(answer, ['yes', 'no', 'abort'])
+
+                if intent == 'abort' and self.checkAbort():
+                    return
+
+
+    def guideCooking(self, recipe):
+        if self.abort:
+            return
+
+        self.brain.speak("Let's start cooking. When you're ready for the next step, say next.")
+
+        for instruction in recipe['instructions']:
+            if self.abort:
+                return
+
+            self.brain.speak(instruction)
+
+            next = False
+            while not next and not self.abort: 
+                answer = self.brain.listen()
+                intent = self.brain.interpret(answer, ['next', 'abort'])
+
+                if intent == 'abort':
+                    self.checkAbort()
+
+                if intent == 'next':
+                    next = True
+
 
 if __name__ == '__main__':
     import brain

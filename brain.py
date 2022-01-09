@@ -39,9 +39,14 @@ class NlpProcessor:
             intent = 'abort'
             return intent
 
+        if re.search("(.*next.*)", message):
+            intent = 'next'
+            return intent
+
         if re.search("(.*quit.*)|(exit)|(shutdown)", message):
             intent = 'quit'
             return intent
+
 
 class Brain:
     def __init__(self):
@@ -86,7 +91,6 @@ class Brain:
     def interpret(self, message, expectedIntent):
         return self.nlpProcessor.decodeIntent(message, expectedIntent);
 
-
     def listen(self):
         return sp.blockingListen()
 
@@ -119,9 +123,6 @@ class Brain:
 
 
     def startChatBot(self):
-        print("Chatting")
-        breakpoint()
-
         chatBotAbility = ChatBot(self)
         chatBotAbility.start()
 
