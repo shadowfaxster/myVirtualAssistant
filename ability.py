@@ -13,7 +13,7 @@ class Ability:
 
         if intent == 'yes':
             self.brain.speak("Ok, aborting process")
-            self.abort == True
+            self.abort = True
             return True
         else:
             return False
