@@ -35,7 +35,7 @@ class NlpProcessor:
             intent = 'chatting'
             return intent
 
-        if re.search(".*abort.*", message):
+        if re.search(".*stop.*", message):
             intent = 'abort'
             return intent
 
@@ -58,7 +58,7 @@ class Brain:
 
         self.abilities = {
             'cooking' : self.startCooking, 
-            'unknown' : lambda: self.speak("What the fuck does that mean?"), 
+            'unknown' : lambda: self.speak("I don't know what that means."), 
             'chatting' : self.startChatBot,
             'quit' : self.requestQuit
         }

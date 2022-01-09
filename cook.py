@@ -56,8 +56,10 @@ class Cooking(ability.Ability):
                 if intent == 'yes':
                     found = True
                     break
-                elif intent == 'abort':
-                    self.checkAbort()
+
+                elif intent == 'abort' and self.checkAbort():
+                    break
+
                 elif intent == 'unknown':
                     self.brain.reactOnIntent(intent)
                     self.brain.speak("I'll take that as a No")

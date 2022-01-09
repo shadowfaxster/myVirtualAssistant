@@ -95,22 +95,6 @@ class RecipeDatabase:
 
         return get_receipes_that_contains_this_but_not_that(include, exclude, self.cooking_df)
 
-        # Apel function tudor
-
-        recipes = [
-        {'name' : 'Chicken burrito', 
-        'ingredients' : ['1 kilo chicken', '1 bottle wine'], 
-        'instructions' : ['Cook the chicken', 'Drink the wine']
-        }, 
-        { 'name' : 'Chicken burrito', 
-        'ingredients' : ['1 kilo chicken', '1 bottle wine'], 
-        'instructions' : ['Cook the chicken', 'Drink the wine'] 
-        } 
-        ]
-
-        return recipes
-
-
 if __name__ == '__main__':
     cooking_df = RecipeDatabase().get_cooking_df()
 
