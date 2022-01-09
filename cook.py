@@ -38,10 +38,6 @@ class Cooking(ability.Ability):
         # 3. Start cooking process
         #self.startCookingProcess(recipe)
 
-
-        self.brain.speak("Ok. We're done cooking. Going back to sleep! Bye-bye!")
-
-
     def searchRecipe(self):
         found = False;
         while not found and not self.abort:
@@ -57,11 +53,13 @@ class Cooking(ability.Ability):
                 self.brain.speak("How about {}?".format(recipe.title))
 
                 answer = self.brain.listen()
-                intent = self.brain.interpret(answer, ['yes', 'no'])
+                intent = self.brain.interpret(answer, ['yes', 'no', 'abort'])
 
                 if intent == 'yes':
                     found = True
                     break
+                elif intent == 'abort':
+                    self.checkAbort()
                 elif intent == 'unknown':
                     self.brain.reactOnIntent(intent)
                     self.brain.speak("I'll take that as a No")

@@ -1,6 +1,7 @@
 import ear as sp
 import voice as vo
 from cook import Cooking
+from chatbot import ChatBot
 
 import threading
 import re
@@ -18,8 +19,8 @@ class NlpProcessor:
             return "unknown"
 
     def interpretMessage(self, message):
-        if re.search("(.*start.*cook.*)|(hungry)", message):
-            intent = 'startCooking';
+        if re.search("(.*cook.*)|(hungry)", message):
+            intent = 'cooking';
             return intent
 
         if re.search("(.*yes.*)|(.*ok.*)|(.*fine.*)", message):
@@ -30,6 +31,10 @@ class NlpProcessor:
             intent = 'no'
             return intent
 
+        if re.search(".*chat.*", message):
+            intent = 'chatting'
+            return intent
+
         if re.search(".*abort.*", message):
             intent = 'abort'
             return intent
@@ -38,24 +43,20 @@ class NlpProcessor:
             intent = 'quit'
             return intent
 
-
 class Brain:
     def __init__(self):
         self.startWorking = threading.Event()
 
-        self.loadAbilities()
         self.terminate = False;
 
         self.nlpProcessor = NlpProcessor()
 
-
-    def loadAbilities(self):
         self.abilities = {
-                            'startCooking' : self.startCooking, 
-                            'unknown' : lambda: self.speak("What the fuck does that mean?"), 
-                            'chat' : lambda: self.runChatBot,
-                            'quit' : lambda: self.requestQuit
-                          }
+            'cooking' : self.startCooking, 
+            'unknown' : lambda: self.speak("What the fuck does that mean?"), 
+            'chatting' : self.startChatBot,
+            'quit' : self.requestQuit
+        }
 
 
     def wakeOnKeyword(self):
@@ -71,6 +72,8 @@ class Brain:
             listenForName(wait_for_stop=False)
 
             self.speak('Yes sir? How can I help?')
+
+            print("Available commands are ", format(list(self.abilities.keys())))
             
             message = self.listen();
             intent = self.interpret(message, list(self.abilities.keys()))
@@ -107,18 +110,24 @@ class Brain:
 
         self.reactOnIntent(intent);
 
+        self.speak("Ok. We're done {}. Going back to sleep! Bye-bye!".format(intent))
+
 
     def reactOnIntent(self, intent):
-        # Check the abilities and react on intent
-        self.abilities[intent]()
+        callback = self.abilities.get(intent, "unknown");
+        callback()
 
-    def runChatBot(self):
-        # Start aiml chat bot
-        pass
+
+    def startChatBot(self):
+        print("Chatting")
+        breakpoint()
+
+        chatBotAbility = ChatBot(self)
+        chatBotAbility.start()
+
 
     def startCooking(self):
         cookingAbility = Cooking(self)
-
         cookingAbility.start()
 
     def requestQuit(self):
