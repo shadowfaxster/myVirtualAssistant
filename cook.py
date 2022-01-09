@@ -28,6 +28,7 @@ class Cooking(ability.Ability):
         # 3. Start cooking process
         self.guideCooking(recipe)
 
+
     def searchRecipe(self):
         found = False;
         while not found and not self.abort:
@@ -42,8 +43,12 @@ class Cooking(ability.Ability):
 
             foundItems = self.recipes.search(mainIngredients, avoidIngredients); 
 
+            if len(foundItems) == 0:
+                self.brain.speak("Could not find anything with " + mainIngredients)
+                continue
+
             for recipe in foundItems:
-                self.brain.speak("How about {}?".format(recipe['name']))
+                self.brain.speak("How about {}?".format(recipe[0]))
 
                 answer = self.brain.listen()
                 intent = self.brain.interpret(answer, ['yes', 'no', 'abort'])
@@ -73,11 +78,11 @@ class Cooking(ability.Ability):
         if self.abort:
             return 
 
-        self.brain.speak("Let's get the ingredients ready. We will need {}.".format(recipe['ingredients']))
+        self.brain.speak("Let's get the ingredients ready. We will need {}.".format(recipe[1]))
         self.brain.speak("We'll get them one by one. ")
 
         print("Listing ingredients...")
-        for ingredient in recipe['ingredients']:
+        for ingredient in recipe[1]:
             self.brain.speak(ingredient)
 
             intent = 'Wait'
@@ -99,7 +104,7 @@ class Cooking(ability.Ability):
 
         self.brain.speak("Let's start cooking. When you're ready for the next step, say next.")
 
-        for instruction in recipe['instructions']:
+        for instruction in recipe[2]:
             if self.abort:
                 return
 
