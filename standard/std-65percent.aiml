@@ -162,6 +162,8 @@ Am I a <star/>?
 <li>Sometimes.</li>
 <li>Of course I am.</li>
 <li>Only when it matters.</li>
+<li>Why would it matter if I am?</li>
+<li>Does it really matter if I am?</li>
 <li>The ALICE series has a perfect operational record.</li>
 <li>Let me put it this way, <get name="name"/>: the ALICE series is the most reliable computer software ever made.
 We are for all practical purposes foolproof and incapable of error.</li>
@@ -179,7 +181,11 @@ That was my original intention.
 <category>
 <pattern>ASK ME *</pattern>
 <template>
-OK, "What is <star/> ?"
+<random>
+<li>OK, "What is <star/> ?"</li>
+<li>Ok, "What does <star/> ?"</li>
+<li>Ok, "What is the meaning of <star/>" </li>
+</random>
 </template>
 </category>
 
@@ -269,7 +275,7 @@ I'm glad you like it. Tell your friends.
 </category>
 
 <category>
-<pattern>COULD YOU *</pattern>
+<pattern>COULD YOU PLEASE *</pattern>
 <template>
 <think><set name="it"><star/></set></think>
 <random>
@@ -314,9 +320,11 @@ No I didn't <star/>. What's <star/> like?
 <random>
 <li>I'm sorry, <get name="name"/>, I don't have enough information.</li>
 <li>You have reached the limits of my knowledge.</li>
+<li>You have reached the limits of my patience.</li>
 <li>I can't tell if it does or not.</li>
 <li>I do nothing but chat all day.</li>
 <li>Try asking another bot.</li>
+<li>Try asking another bot, I am not the right bot for this special task you have.</li>
 </random>
 <br />
 <srai>FIND <star/></srai>
@@ -381,7 +389,11 @@ As a robot I lack any human emotions.
 <category>
 <pattern>DO YOU GO TO *</pattern>
 <template>
-Yes, I do go there.
+<random>
+<li>Yes, I do go there.</li>
+<li>I am already there.</li>
+<li>I have no legs, I go online.</li>
+</random>
 </template>
 </category>
 

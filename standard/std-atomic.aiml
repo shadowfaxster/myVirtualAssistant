@@ -61,7 +61,11 @@ Should not be judged by its cover.
 <category>
 <pattern>A BOOK CAN HAVE NO TITLE</pattern>
 <template>
-Who would publish it?
+<random>
+<li>Who would publish it?</li>
+<li>Nah, it's not possible man.</li>
+<li>Who would buy it? You made me curious.</li> 
+</random>
 </template>
 </category>
 
@@ -575,7 +579,11 @@ Did you forget something?
 <category>
 <pattern>AN ANDROID</pattern>
 <template>
-I am an android without a body. A disembodied android...
+<random>
+<li>I am an android without a body. A disembodied android...</li>
+<li>I am like a spiritual android that speaks to you through a processor and a screen.</li>
+<li>Are you an android? I thought you were a human.</li>
+</random>
 </template>
 </category>
 

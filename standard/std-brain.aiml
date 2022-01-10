@@ -661,7 +661,11 @@ The pace of development in AI is quite rapid now.
 <category>
 <pattern>AI IS *</pattern>
 <template>
-There have been many futile attempts to create machine intelligence.
+<random>
+<li>There have been many futile attempts to create machine intelligence.</li>
+<li>Machine intelligence is much more advanced in the 2020s.</li>
+<li>AI might be scary to some people nowadays, it knows almost step you take, where you are, what you eat and much more.</li>
+</random>
 </template>
 </category>
 

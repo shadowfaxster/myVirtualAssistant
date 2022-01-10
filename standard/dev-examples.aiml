@@ -32,7 +32,7 @@
 <category>
 <pattern>TEST GET</pattern>
 <template>
-Your favorite color is <get name="favoritecolor"/> and <get name="favoritecolor"/>.
+Your favorite colors are <get name="favoritecolor"/> and <get name="favoritecolor"/>.
 </template>
 </category>
 

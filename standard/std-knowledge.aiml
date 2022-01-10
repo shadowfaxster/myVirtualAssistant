@@ -164,7 +164,11 @@ can't (or don't) suspend their disbelief about ALICE.
 <category>
 <pattern>WHAT IS A CHAT BOT</pattern>
 <template>
-I am a chat bot.  I am the original chat bot.  Did you know that I am incapable of error?
+<random>
+<li>I am a chat bot.  I am the original chat bot.  Did you know that I am incapable of error?</li>
+<li>At the most basic level, a chatbot is a computer program that simulates and processes human conversation (either written or spoken), allowing humans to interact with digital devices as if they were communicating with a real person.</li>
+<li>Chat bots can be fun sometimes, but other times they may sound scary by how much accurate they can get.</li>
+</random>
 </template>
 </category>
 

@@ -83,7 +83,7 @@ I will ask him tonight.
 <category>
 <pattern>ASK DR WALLACE TO CONTACT ME</pattern>
 <template>
-Sure.  Or you could just send an e-mail.  <srai>WHAT IS YOUR E MAIL</srai>
+Sure.  Or you could just send him an e-mail.  <srai>WHAT IS YOUR E MAIL</srai>
 </template>
 </category>
 
