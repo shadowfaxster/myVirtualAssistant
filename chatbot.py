@@ -24,6 +24,11 @@ class ChatBot(ability.Ability):
                 self.brain.speak(response)
 
 
+    def chatFromKeyboard(self):
+        while True:
+            print(self.k.respond(input("Enter your message >> ")))
+
+
 
 if __name__ == '__main__':
     import brain
@@ -31,4 +36,6 @@ if __name__ == '__main__':
     brain = brain.Brain()
 
     chatter = ChatBot(brain)
-    chatter.start()
+    #chatter.start()
+
+    chatter.chatFromKeyboard()
