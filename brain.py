@@ -23,7 +23,7 @@ class NlpProcessor:
             intent = 'cooking';
             return intent
 
-        if re.search("(.*yes.*)|(.*ok.*)|(.*fine.*)", message):
+        if re.search("(.*yes.*)|(.*ok.*)|(.*fine.*)|(.*yeah.*)", message):
             intent = 'yes'
             return intent
 
